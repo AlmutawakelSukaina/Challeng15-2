@@ -29,7 +29,7 @@ class TimePickerFragment : DialogFragment(){
 
           val resultDate : Date = GregorianCalendar( initialYear, initialMonth, initialDay,hour,minute).time
           targetFragment?.let { fragment -> (fragment as DatePickerFragment.Callbacks).onDateSelected(resultDate)
-              
+
 
             }
 

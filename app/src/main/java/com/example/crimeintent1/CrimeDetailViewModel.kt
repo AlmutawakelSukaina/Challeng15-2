@@ -20,4 +20,6 @@ class CrimeDetailViewModel() : ViewModel() {
         crimeRepository.updateCrime(crime)
     }
 
+
+
 }

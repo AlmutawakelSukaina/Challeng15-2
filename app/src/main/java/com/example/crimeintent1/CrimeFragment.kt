@@ -27,6 +27,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     private lateinit var dateButton: Button
     private lateinit var timeButton:Button
     private lateinit var solvedCheckBox: CheckBox
+
     private val crimeDetailViewModel: CrimeDetailViewModel by
     lazy {
         ViewModelProviders.of(this).get(CrimeDetailViewModel::class.java)
@@ -66,6 +67,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
 
         dateButton = view.findViewById(R.id.crime_date) as Button
         timeButton=view.findViewById(R.id.crime_tIME) as Button
+
        /* dateButton.apply {
             text = crime.date.toString()
             isEnabled = false
