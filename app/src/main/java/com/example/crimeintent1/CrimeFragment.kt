@@ -1,4 +1,5 @@
 package com.example.crimeintent1
+import PictureDialogFragment
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -96,6 +98,13 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         photoButton = view.findViewById(R.id.crime_camera) as ImageButton
         photoView = view.findViewById(R.id.crime_photo) as ImageView
 
+
+        val observer: ViewTreeObserver = photoView.getViewTreeObserver()
+        observer.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                photoView.getViewTreeObserver().removeGlobalOnLayoutListener(this)
+            }
+        })
         /* dateButton.apply {
              text = crime.date.toString()
              isEnabled = false
