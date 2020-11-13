@@ -49,6 +49,10 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
     private lateinit var photoView: ImageView
     private lateinit var photoFile: File
     private lateinit var photoUri: Uri
+    private   var width:Int=0
+    private var hiegth:Int=0
+
+
 
 
 
@@ -99,10 +103,11 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
         photoView = view.findViewById(R.id.crime_photo) as ImageView
 
 
-        val observer: ViewTreeObserver = photoView.getViewTreeObserver()
+        val observer: ViewTreeObserver = photoView.viewTreeObserver
         observer.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                photoView.getViewTreeObserver().removeGlobalOnLayoutListener(this)
+               width=photoView.width
+                hiegth=photoView.height
             }
         })
         /* dateButton.apply {
@@ -276,16 +281,16 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
         }
-        updatePhotoView()
+        updatePhotoView(hiegth,width)
 
 
     }
 
 
-    private fun updatePhotoView() {
+    private fun updatePhotoView(h:Int,w:Int) {
         if (photoFile.exists()) {
             val bitmap = getScaledBitmap(photoFile.path,
-                requireActivity())
+                w,h)
             photoView.setImageBitmap(bitmap)
         } else {
             photoView.setImageDrawable(null)
@@ -340,7 +345,7 @@ class CrimeFragment : Fragment() , DatePickerFragment.Callbacks{
             requestCode == REQUEST_PHOTO -> {
                 requireActivity().revokeUriPermission(photoUri,
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                updatePhotoView()
+                updatePhotoView(hiegth,width)
             }
         }
     }
